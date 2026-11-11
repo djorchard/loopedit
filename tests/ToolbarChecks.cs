@@ -91,9 +91,10 @@ public static class ToolbarChecks
                         if (pixel.G > pixel.R + 20 && pixel.G > pixel.B) mintPixels++;
                         if (pixel.R > pixel.G + 20 && pixel.G > pixel.B + 20) copperPixels++;
                     }
-                    Check(bitmap.GetPixel(0, 0).ToArgb() == toolbar.BackColor.ToArgb() && bitmap.GetPixel(bitmap.Width - 1, bitmap.Height - 1).ToArgb() == toolbar.BackColor.ToArgb()
+                    Check(wordmark.AccessibleName == Branding.Name
+                        && bitmap.GetPixel(0, 0).ToArgb() == toolbar.BackColor.ToArgb() && bitmap.GetPixel(bitmap.Width - 1, bitmap.Height - 1).ToArgb() == toolbar.BackColor.ToArgb()
                         && mintPixels > 200 && copperPixels > 30,
-                        "the native-hidden vector wordmark renders mint lettering copper tape and matching corners at simulated " + dpi + " DPI");
+                        "the embedded wordmark renders mint lettering and copper tape within the themed toolbar at simulated " + dpi + " DPI");
                 }
                 wordmark.Size = originalSize;
                 var samples = new float[128]; var track = new AudioTrack { Path = "Toolbar fixture.wav", Samples = samples, Peaks = new PeakPyramid(samples), Rhythm = new(120, [], []) };

@@ -4,7 +4,7 @@ namespace OrchardSound;
 
 public static class Branding
 {
-    public const string Name = "LoopOrchard";
+    public const string Name = "LoopEdit";
 
     // Keep existing export and mouse preferences available to both builds.
     internal const string SettingsDirectoryName = "Loopsmith";

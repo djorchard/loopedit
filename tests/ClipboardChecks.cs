@@ -67,7 +67,7 @@ public static class ClipboardChecks
                 Reject(ClipboardAudio.LoadWaveAsync(wav, root, AudioFiles.MaxSessionBytes - 4), "decoded clipboard audio respects the session memory limit");
                 Reject(ClipboardAudio.LoadWaveAsync("RIFF\0\0\0\0WAVE"u8.ToArray(), root), "undecodable RIFF audio is rejected");
                 Check(Directory.GetFiles(root).Length == saved, "decoding and session-limit failures remove their retained source");
-                Check(ClipboardAudio.StorageFolder(new[] { decoded }) == root && System.IO.Path.GetFileName(ClipboardAudio.StorageFolder([])) == "LoopOrchard Clipboard" && System.IO.Path.IsPathFullyQualified(ClipboardAudio.StorageFolder([])), "clipboard storage uses a source folder or the Music clipboard folder");
+                Check(ClipboardAudio.StorageFolder(new[] { decoded }) == root && System.IO.Path.GetFileName(ClipboardAudio.StorageFolder([])) == "LoopEdit Clipboard" && System.IO.Path.IsPathFullyQualified(ClipboardAudio.StorageFolder([])), "clipboard storage uses a source folder or the Music clipboard folder");
 
                 using var form = new EditorForm([]); _ = form.Handle;
                 var canvas = (WaveCanvas)typeof(EditorForm).GetField("canvas", Private)!.GetValue(form)!;

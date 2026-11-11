@@ -1,6 +1,6 @@
-# LoopOrchard
+# LoopEdit
 
-![LoopOrchard wordmark with tape reels for the two Os](assets/looporchard-wordmark.png)
+<img src="assets/loopedit-wordmark.png" alt="LoopEdit wordmark with copper tape around two reels" width="440">
 
 A Windows audio editor for trimming, mixing, and looping game sounds. Originally created by djorchard. [Creator profile](https://github.com/djorchard)
 
@@ -13,17 +13,17 @@ dotnet build OrchardSound.csproj -c Release
 dotnet run --project OrchardSound.csproj -c Release
 ```
 
-To publish a Windows x64 app folder, run the command below and open `artifacts/LoopOrchard/LoopOrchard.exe`. The published app uses the .NET 10 Desktop Runtime. FFmpeg is installed separately and can also sit beside the executable.
+To publish a Windows x64 app folder, run the command below and open `artifacts/LoopEdit/LoopEdit.exe`. The published app uses the .NET 10 Desktop Runtime. FFmpeg is installed separately and can also sit beside the executable.
 
 ```powershell
-dotnet publish OrchardSound.csproj -c Release -r win-x64 --self-contained false -o ./artifacts/LoopOrchard
+dotnet publish OrchardSound.csproj -c Release -r win-x64 --self-contained false -o ./artifacts/LoopEdit
 ```
 
-LoopOrchard supports existing `.orchardsound` sessions from Orchard Sound Editor. Press F1 in the app for the keyboard and pointer guide. [Shortcut guide](assets/shortcuts.png)
+LoopEdit supports existing `.orchardsound` sessions from Orchard Sound Editor. Press F1 in the app for the keyboard and pointer guide. [Shortcut guide](assets/shortcuts.png)
 
 ## Interface theme
 
-Dialogs use consistent spacing, evenly padded action buttons and LoopOrchard's dark surfaces. Primary actions such as Record and Apply use the mint accent; secondary actions such as Cancel use a neutral outlined style. Sliders use teal thumbs and readable blue-grey channels. Keyboard focus stays visible and disabled actions remain distinct. Status messages and channel BPM labels scale with Windows DPI.
+Dialogs use consistent spacing, evenly padded action buttons and LoopEdit's dark surfaces. Primary actions such as Record and Apply use the mint accent; secondary actions such as Cancel use a neutral outlined style. Sliders use teal thumbs and readable blue-grey channels. Keyboard focus stays visible and disabled actions remain distinct. Status messages and channel BPM labels scale with Windows DPI.
 
 The Ink & Mint style uses ink-blue cards with crisp mint and copper icons drawn as C# vectors. Button backgrounds match their parent surface through their rounded corners, including normal, active and disabled states. The final toolbar button or F1 opens a keyboard and pointer guide drawn from one binding list in code. Click a keyboard key or press one to filter the shortcut list; All shortcuts clears the filter. Guide key presses do not trigger editor actions. Escape closes it and returns focus to the waveform. The reusable image is `assets/shortcuts.png`.
 
@@ -69,9 +69,9 @@ On supported Windows versions, native title bars use matching dark caption and t
 
 Toolbar icons have accessible action names and show their shortcut hints, including left and right mouse selection and the bracket keys.
 
-Supported editor shortcuts also work while the pointer is over an inactive LoopOrchard window. Only editor bindings are intercepted; system Windows-key combinations and unassigned shortcuts remain available. The keyboard guide filters keys, and effect tools retain their transport controls. The hover keyboard hook is installed only when the app is shown and removed on disposal.
+Supported editor shortcuts also work while the pointer is over an inactive LoopEdit window. Only editor bindings are intercepted; system Windows-key combinations and unassigned shortcuts remain available. The keyboard guide filters keys, and effect tools retain their transport controls. The hover keyboard hook is installed only when the app is shown and removed on disposal.
 
-View > Mouse sensitivity offers an optional pointer speed from 1 to 20. Windows exposes this as a global setting, so LoopOrchard temporarily sets it only while the pointer is over the app and restores the previous speed when it leaves, the option is disabled or the app closes. The setting starts disabled. The user's original Windows value is kept only in memory; the chosen LoopOrchard preference is saved separately. An external speed change is respected. This does not replace zoom-dependent audio guide precision or Shift fine control.
+View > Mouse sensitivity offers an optional pointer speed from 1 to 20. Windows exposes this as a global setting, so LoopEdit temporarily sets it only while the pointer is over the app and restores the previous speed when it leaves, the option is disabled or the app closes. The setting starts disabled. The user's original Windows value is kept only in memory; the chosen LoopEdit preference is saved separately. An external speed change is respected. This does not replace zoom-dependent audio guide precision or Shift fine control.
 
 Playback prepares up to about 180 ms of audio ahead. One output device uses 120 ms of buffering divided into three buffers. Volume and live effect changes replace the upcoming audio at the same play position, with a 10 ms crossfade between the old and new sound. These paths are checked through the real NAudio float-to-byte adapter and synthetic output owners; subjective listening remains a separate check.
 
@@ -101,7 +101,7 @@ Tick Automate start and end to expose end values and linearly vary numeric setti
 
 Reverb and Delay have Cut tail at selection end enabled by default. Untick it to let the tail blend into later audio and extend the track when necessary. Committed edits support Undo and Redo.
 
-Record (Shift+R, with Ctrl+Alt+R retained as an alias) opens input and destination choices before capture starts. Choose an existing channel or New track, then Record. The default is the first empty channel, otherwise the first enabled one, otherwise New track. Press Record again to stop and load the result there. Capture writes a new 44.1 kHz, 16-bit mono WAV, which the editor converts to its normal stereo timeline when loaded. Recording files go beside the first loaded sound, or into `Music/LoopOrchard Recordings` if no sound is loaded. Existing files are never overwritten.
+Record (Shift+R, with Ctrl+Alt+R retained as an alias) opens input and destination choices before capture starts. Choose an existing channel or New track, then Record. The default is the first empty channel, otherwise the first enabled one, otherwise New track. Press Record again to stop and load the result there. Capture writes a new 44.1 kHz, 16-bit mono WAV, which the editor converts to its normal stereo timeline when loaded. Recording files go beside the first loaded sound, or into `Music/LoopEdit Recordings` if no sound is loaded. Existing files are never overwritten.
 
 The recording limit is approximately 11 minutes so the captured sound can fit the editor's decoded audio limit. Stopping flushes and closes the WAV. A device failure retains usable audio already captured, while an empty failed recording is removed. A nonresponsive input has a bounded stop. Recording starts only after an explicit Record action and input choice; no audio is captured merely by opening the app or picker.
 
@@ -139,8 +139,17 @@ dotnet run --project tests/OrchardSound.Tests.csproj -c Release
 
 ## Credits and license
 
-LoopOrchard was originally created by djorchard. The project icon was generated for LoopOrchard with OpenAI image generation. The toolbar wordmark uses two tape reels for the Os in Loop. It is drawn by `WordmarkControl.cs`.
+LoopEdit was originally created by djorchard. The toolbar uses the original tape-wrap design with LoopEdit lettering. The artwork was edited with built-in ImageGen and is saved in `assets/loopedit-wordmark.png`.
 
-The project uses a custom source-available license. You can build, modify, and share the editor with creator credit and the LoopOrchard application name preserved. [License](LICENSE)
+<details>
+<summary>Wordmark editing prompts</summary>
+
+> Edit the supplied original wordmark into exactly LoopEdit. Preserve the entire original Loop portion, particularly the nearly touching teal reels, dark rims, three triangular spokes, orange hubs, and the copper tape band physically hugging the upper and lower reel rims with two lower guide rollers. Replace only the suffix smith with Edit, capital E and lowercase dit, in the same rounded mint lettering, shading, baseline and weight. Keep a tight horizontal layout on genuine transparency with clean alpha edges. No extra lettering, border, panel, shadows outside the existing forms, or tape paths around the outside of the whole word.
+
+> Clean up this exact LoopEdit wordmark for use as a compact desktop toolbar logo. Preserve the exact spelling, rounded mint lettering, teal reels with triangular spokes, copper hubs, and the physical copper tape hugging the outer reel rims and running over the two lower rollers. The white and cyan edge debris between letters and near the edges is accidental: remove it completely. Every gap and letter counter must be clean, genuinely transparent alpha, with smooth antialiased edges and no white matte. Crop close to the wordmark, with small even transparent margins. No redraw of the overall shape, no box, no added details.
+
+</details>
+
+The project uses a custom source-available license. You can build, modify, and share the editor with creator credit and the LoopEdit application name preserved. [License](LICENSE)
 
 NAudio 2.2.1 provides Windows playback and WAV output under the MIT license. [NAudio notice](licenses/NAudio.txt) · [Upstream project](https://github.com/naudio/NAudio/tree/v2.2.1)

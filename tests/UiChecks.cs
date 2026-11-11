@@ -53,10 +53,10 @@ public static class UiChecks
                     return false;
                 }
 
-                Check(form.Text == "LoopOrchard" && typeof(EditorForm).Assembly.GetName().Name == "LoopOrchard", "window and application assembly use the LoopOrchard name");
-                using (var iconStream = typeof(EditorForm).Assembly.GetManifestResourceStream("LoopOrchard.AppIcon"))
+                Check(form.Text == "LoopEdit" && typeof(EditorForm).Assembly.GetName().Name == "LoopEdit", "window and application assembly use the LoopEdit name");
+                using (var iconStream = typeof(EditorForm).Assembly.GetManifestResourceStream("LoopEdit.AppIcon"))
                 {
-                    if (iconStream == null) throw new Exception("LoopOrchard app icon resource is missing");
+                    if (iconStream == null) throw new Exception("LoopEdit app icon resource is missing");
                     using var data = new MemoryStream(); iconStream.CopyTo(data); byte[] iconBytes = data.ToArray();
                     using var reader = new BinaryReader(new MemoryStream(iconBytes));
                     ushort reserved = reader.ReadUInt16(), kind = reader.ReadUInt16(), count = reader.ReadUInt16();
@@ -64,14 +64,14 @@ public static class UiChecks
                     for (int i = 0; i < count; i++)
                     { int width = reader.ReadByte(); _ = reader.ReadByte(); reader.BaseStream.Position += 14; sizes.Add(width == 0 ? 256 : width); }
                     Check(reserved == 0 && kind == 1 && count >= 4 && sizes.Contains(16) && sizes.Contains(32) && sizes.Contains(256), "embedded app icon includes desktop and small-window resolutions");
-                    if (form.Icon == null) throw new Exception("LoopOrchard window icon is missing");
+                    if (form.Icon == null) throw new Exception("LoopEdit window icon is missing");
                     using var expectedIcon = new Icon(new MemoryStream(iconBytes), form.Icon.Size);
                     using var expectedBitmap = expectedIcon.ToBitmap(); using var actualBitmap = form.Icon.ToBitmap();
                     bool matches = expectedBitmap.Size == actualBitmap.Size, visible = false;
                     for (int y = 0; y < actualBitmap.Height && matches; y++)
                         for (int x = 0; x < actualBitmap.Width; x++)
                         { Color pixel = actualBitmap.GetPixel(x, y); matches &= pixel.ToArgb() == expectedBitmap.GetPixel(x, y).ToArgb(); visible |= pixel.A != 0; }
-                    Check(matches && visible, "window uses the generated LoopOrchard icon");
+                    Check(matches && visible, "window uses the generated LoopEdit icon");
                 }
                 Check(form.WindowState == FormWindowState.Maximized, "app starts maximized");
                 Check(canvas.Slots.Count == 1 && canvas.Slots[0].Track == null && !canvas.Tracks.Any(), "session starts with one empty channel");
