@@ -13,7 +13,7 @@
     <Description>Multitrack audio editing, loops and effects.</Description>
     <Copyright>Copyright (c) 2026 djorchard</Copyright>
     <ApplicationIcon>assets/loopedit.ico</ApplicationIcon>
-    <Version>1.3.9</Version>
+    <Version>1.3.10</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NAudio" Version="2.2.1" />
